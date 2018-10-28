@@ -1,71 +1,66 @@
-'use strict';
+const through = require('through2');
+const cheerio = require('cheerio');
+const objectAssign = require('object-assign');
+const gutil = require('gulp-util');
 
-var through = require('through2');
-var cheerio = require('cheerio');
-var objectAssign = require('object-assign');
+const reImageSrc = /^((?:(?:http|https):\/\/)?(?:.+))(\.(?:gif|png|jpg|jpeg|webp))$/;
 
-var reImageSrc = /^((?:(?:http|https):\/\/)?(?:.+))(\.(?:gif|png|jpg|jpeg|webp))$/;
+const defaultOptions = {
+  decodeEntities: false,
+  suffix: {1: '', 2: '@2x', 3: '@3x'}
+};
 
-var defaultOptions = {
-	decodeEntities: false,
+const imageRetina = function(options) {
 
-	// suffix: {1: '', 2: '@2x', 3: '@3x', 4: '@4x'}
-	suffix: {1: '', 2: '@2x', 3: '@3x'}
-}
+  options = objectAssign({}, defaultOptions, options);
 
-var imageRetina = function(options){
+  return through.obj(function(file, enc, cb) {
+    if (file.isNull()) {
+      cb(null, file);
+      return;
+    }
 
-	options = objectAssign({}, defaultOptions, options);
+    if (file.isStream()) {
+      cb(new gutil.PluginError('gulp-img-imgz-lazyload', 'Streaming not supported'));
+      return;
+    }
 
-	return through.obj(function(file, enc, cb){
-		if (file.isNull()){
-			cb(null, file);
-			return;
-		}
+    const content = file.contents.toString();
 
-		if (file.isStream()){
-			cb(new gutil.PluginError('gulp-img-retina', 'Streaming not supported'));
-			return;
-		}
+    const $ = cheerio.load(content, options);
 
-		var content = file.contents.toString();
+    const imgList = $('img');
 
-		var $ = cheerio.load( content, options );
+    imgList.each(function() {
+      const _this = $(this);
+      let prefix = '';
+      let src = _this.attr('src');
 
-		var imgList = $('img');
+      if (!src) {
+        src = _this.attr('data-src');
+        prefix = 'data-';
+      }
 
-		imgList.each(function(item){
-			var _this = $(this);
-			var prefix = '';
-			var src = _this.attr('src');
+      const tmpSrc = [];
+      const match = src.match(reImageSrc);
 
-			if(!src) {
-                src = _this.attr('data-src');
-                prefix = 'data-';
-			}
+      // not a valid src attribute
+      if (match === null) {
+        return true;
+      }
 
+      for (let key = 1; key < 4; key++) {
+        tmpSrc.push(match[1] + options.suffix[key] + match[2] + ' ' + key + 'x');
+      }
 
-			var tmpSrc = [];
-			var match = src.match(reImageSrc);
+      _this.attr(prefix + 'srcset', tmpSrc.join(', '));
+    });
 
-			// not a valid src attribute
-			if (match === null){
-				return true;
-			}
+    file.contents = new Buffer($.html());
 
-			for( var key in options.suffix ){
-				tmpSrc.push( match[1]+options.suffix[key]+match[2]+' '+key+'x' );
-			}
-
-			_this.attr( prefix + 'srcset', tmpSrc.join(', '));
-		});
-		// console.log($.html());
-
-		file.contents = new Buffer( $.html() );
-
-		cb(null, file);
-	});
-}
+    cb(null, file);
+  });
+};
 
 
 module.exports = imageRetina;
