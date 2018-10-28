@@ -28,11 +28,11 @@
   "homepage": "https://github.com/karensg/gulp-responsive-imgz-lazyload",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "through2": "^2.0.3",
-    "object-assign": "^4.1.1"
+    "object-assign": "^4.1.1",
+    "through2": "^2.0.3"
   },
   "devDependencies": {
-    "mocha": "^5.2.0",
-    "gulp-util": "^3.0.8"
+    "gulp-util": "^3.0.8",
+    "mocha": "^5.2.0"
   }
 }
