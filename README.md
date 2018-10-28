@@ -1,16 +1,14 @@
-# gulp-responsive-imgz
-## (clone of the innactive `gulp-img-retina` repo)
+# gulp-responsive-imgz-lazyload
+## (clone of the `gulp-responsive-imgz` repo)
 
-[![Build Status](https://travis-ci.org/eliwilliamson/gulp-responsive-imgz.svg?branch=master)](https://travis-ci.org/eliwilliamson/gulp-responsive-imgz)
-
-add img attribute 'srcset' for retina
+add img attribute 'data-srcset' for retina and make it work with lazyload libraries
 
 ## Prerequisites
 You must have retina images in the folder which the original image in.
 
 ## Install
 
-`npm install gulp-responsive-imgz`
+`npm install gulp-responsive-imgz-lazyload`
 
 ## Usage
 

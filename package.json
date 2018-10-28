@@ -1,14 +1,14 @@
 {
-  "name": "gulp-responsive-imgz",
-  "version": "0.0.4",
-  "description": "add img attribute 'srcset' for retina",
+  "name": "gulp-responsive-imgz-lazyload",
+  "version": "0.0.5",
+  "description": "Add img attribute 'data-srcset' for retina which works with lazyload",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eliwilliamson/gulp-responsive-imgz"
+    "url": "https://github.com/karensg/gulp-responsive-imgz-lazeload"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=6"
   },
   "scripts": {
     "test": "mocha"
@@ -17,18 +17,19 @@
     "retina",
     "srcset",
     "image",
-    "gulpplugin"
+    "gulpplugin",
+    "lazyload"
   ],
-  "author": "Eli Williamson <eliwilliamson@gmail.com>",
+  "author": "Karens Grigorjancs <karens.grigorjancs@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/eliwilliamson/gulp-responsive-imgz/issues"
+    "url": "https://github.com/karensg/gulp-responsive-imgz-lazyload/issues"
   },
-  "homepage": "https://www.eliwilliamson.com",
+  "homepage": "https://github.com/karensg/gulp-responsive-imgz-lazyload",
   "dependencies": {
-    "cheerio": "^0.20.0",
-    "through2": "^2.0.1",
-    "object-assign": "^4.1.0"
+    "cheerio": "^1.0.0-rc.2",
+    "through2": "^2.0.3",
+    "object-assign": "^4.1.1"
   },
   "devDependencies": {
     "mocha": "^2.2.5",

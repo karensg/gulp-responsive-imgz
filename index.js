@@ -50,7 +50,7 @@ var imageRetina = function(options){
 				tmpSrc.push( match[1]+options.suffix[key]+match[2]+' '+key+'x' );
 			}
 
-			_this.attr('srcset', tmpSrc.join(', '));
+			_this.attr('data-srcset', tmpSrc.join(', '));
 		});
 		// console.log($.html());
 
