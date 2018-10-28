@@ -36,7 +36,14 @@ var imageRetina = function(options){
 
 		imgList.each(function(item){
 			var _this = $(this);
+			var prefix = '';
 			var src = _this.attr('src');
+
+			if(!src) {
+                src = _this.attr('data-src');
+                prefix = 'data-';
+			}
+
 
 			var tmpSrc = [];
 			var match = src.match(reImageSrc);
@@ -50,7 +57,7 @@ var imageRetina = function(options){
 				tmpSrc.push( match[1]+options.suffix[key]+match[2]+' '+key+'x' );
 			}
 
-			_this.attr('data-srcset', tmpSrc.join(', '));
+			_this.attr( prefix + 'srcset', tmpSrc.join(', '));
 		});
 		// console.log($.html());
 
