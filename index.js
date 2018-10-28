@@ -44,9 +44,10 @@ const imageRetina = function(options) {
       const tmpSrc = [];
       const match = src.match(reImageSrc);
 
-      // not a valid src attribute
+      // Not a valid src attribute
       if (match === null) {
-        return true;
+        cb(new gutil.PluginError('gulp-img-imgz-lazyload', 'Not a valid image src. Please check it.'));
+        return;
       }
 
       for (let key = 1; key < 4; key++) {
