@@ -1,5 +1,5 @@
 const assert = require('assert');
-const gutil = require('gulp-util');
+const Vinyl = require('vinyl');
 const imgRetina = require('./index');
 
 const imgInput = '<img src="blank.png"><img src="/path/blank.png">';
@@ -20,7 +20,7 @@ describe('gulp-img-retina', function() {
       cb();
     });
 
-    stream.write(new gutil.File({
+    stream.write(new Vinyl({
       path: 'index.html',
       contents: new Buffer(imgInput)
     }));

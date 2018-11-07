@@ -1,7 +1,7 @@
 const through = require('through2');
 const cheerio = require('cheerio');
 const objectAssign = require('object-assign');
-const gutil = require('gulp-util');
+const PluginError = require('plugin-error');
 
 const reImageSrc = /^((?:(?:http|https):\/\/)?(?:.+))(\.(?:gif|png|jpg|jpeg|webp))$/;
 
@@ -21,7 +21,7 @@ const imageRetina = function(options) {
     }
 
     if (file.isStream()) {
-      cb(new gutil.PluginError('gulp-img-imgz-lazyload', 'Streaming not supported'));
+      cb(new PluginError('gulp-img-imgz-lazyload', 'Streaming not supported'));
       return;
     }
 

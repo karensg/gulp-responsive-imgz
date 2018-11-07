@@ -1,6 +1,6 @@
 {
   "name": "gulp-responsive-imgz-lazyload",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Add img attribute 'data-srcset' for retina which works with lazyload",
   "main": "index.js",
   "repository": {
@@ -29,10 +29,11 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "object-assign": "^4.1.1",
+    "plugin-error": "^1.0.1",
     "through2": "^2.0.3"
   },
   "devDependencies": {
-    "gulp-util": "^3.0.8",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "vinyl": "^2.2.0"
   }
 }
