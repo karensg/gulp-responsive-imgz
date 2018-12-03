@@ -29,7 +29,7 @@ const imageRetina = function(options) {
 
     const $ = cheerio.load(content, options);
 
-    const imgList = $('img');
+    const imgList = $('img, source');
 
     imgList.each(function() {
       const _this = $(this);
