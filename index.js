@@ -54,6 +54,11 @@ const imageRetina = function(options) {
       }
 
       _this.attr(prefix + 'srcset', tmpSrc.join(', '));
+
+      // Remove unnecessary attribute on source element
+      if (_this.is('source') && _this.parent().is('picture')) {
+        _this.removeAttr('src');
+      }
     });
 
     file.contents = new Buffer($.html());
